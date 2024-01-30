@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,6 @@ import com.tirzasrwn.app.employee.entity.Employee;
 import com.tirzasrwn.app.employee.service.EmployeeService;
 
 /**
- * null
  * EmployeeRestController
  */
 @RestController
@@ -35,7 +35,17 @@ public class EmployeeRestController {
     return employeeService.findAll();
   }
 
-  // Add mapping for POST /employee to add new employee.
+  // Add mapping for GET /employees/{employeeId} to get a single employee by id.
+  @GetMapping("/employees/{employeeId}")
+  public Employee getEmployee(@PathVariable int employeeId) {
+    Employee dbEmployee = employeeService.findById(employeeId);
+    if (dbEmployee == null) {
+      throw new RuntimeException(String.format("Employe with id %d not found!", employeeId));
+    }
+    return dbEmployee;
+  }
+
+  // Add mapping for POST /employees to add new employee.
   @PostMapping("/employees")
   public Employee addEmployee(@RequestBody Employee theEmployee) {
     // Set the id to zero to force it to save.
@@ -44,7 +54,7 @@ public class EmployeeRestController {
     return dbEmployee;
   }
 
-  // Add mapping for PUT /employee - update existing employee.
+  // Add mapping for PUT /employees - update existing employee.
   @PutMapping("/employees")
   public Employee updateEmployee(@RequestBody Employee theEmployee) {
     Employee dbEmployee = employeeService.save(theEmployee);
