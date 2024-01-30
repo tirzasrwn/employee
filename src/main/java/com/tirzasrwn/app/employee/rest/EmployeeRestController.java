@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +32,14 @@ public class EmployeeRestController {
   @GetMapping("/employees")
   public List<Employee> findAll() {
     return employeeService.findAll();
+  }
+
+  // Add mapping for POST /employee to add new employee.
+  @PostMapping("/employees")
+  public Employee addEmployee(@RequestBody Employee theEmployee) {
+    // Set the id to zero to force it save.
+    theEmployee.setId(0);
+    Employee dbEmployee = employeeService.save(theEmployee);
+    return dbEmployee;
   }
 }
