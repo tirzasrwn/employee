@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +38,15 @@ public class EmployeeRestController {
   // Add mapping for POST /employee to add new employee.
   @PostMapping("/employees")
   public Employee addEmployee(@RequestBody Employee theEmployee) {
-    // Set the id to zero to force it save.
+    // Set the id to zero to force it to save.
     theEmployee.setId(0);
+    Employee dbEmployee = employeeService.save(theEmployee);
+    return dbEmployee;
+  }
+
+  // Add mapping for PUT /employee - update existing employee.
+  @PutMapping("/employees")
+  public Employee updateEmployee(@RequestBody Employee theEmployee) {
     Employee dbEmployee = employeeService.save(theEmployee);
     return dbEmployee;
   }
