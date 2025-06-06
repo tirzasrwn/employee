@@ -50,6 +50,16 @@
 
       <br /><br />
 
+      Phone Number: <input type="text" th:field="*{phoneNumber}" />
+
+      <span
+        th:if="${#fields.hasErrors('phoneNumber')}"
+        th:errors="*{phoneNumber}"
+        class="error"
+      ></span>
+
+      <br /><br />
+
       <input type="submit" value="Submit" />
     </form>
   </body>

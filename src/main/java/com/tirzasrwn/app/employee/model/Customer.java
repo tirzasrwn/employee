@@ -1,5 +1,7 @@
 package com.tirzasrwn.app.employee.model;
 
+import com.tirzasrwn.app.employee.validation.PhoneCode;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +22,17 @@ public class Customer {
 
 	@Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
 	private String postalCode;
+
+	@PhoneCode()
+	private String phoneNumber;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 	public void setFreePasses(Integer freePasses) {
 		this.freePasses = freePasses;
