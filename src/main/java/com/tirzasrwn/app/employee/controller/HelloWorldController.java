@@ -13,10 +13,10 @@ public class HelloWorldController {
 		return "helloworld-form";
 	}
 
-	@RequestMapping("/processForm")
-	public String processForm() {
-		return "helloworld";
-	}
+	// @RequestMapping("/processForm")
+	// public String processForm() {
+	// return "helloworld";
+	// }
 
 	@RequestMapping("/processFormVersionTwo")
 	public String letsShoutDude(@RequestParam("studentName") String theName, Model model) {

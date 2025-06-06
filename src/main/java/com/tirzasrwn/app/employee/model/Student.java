@@ -53,6 +53,7 @@ public class Student {
 		this.lastName = lastName;
 	}
 
+	@Override
 	public String toString() {
 		return firstName
 				+ " "
